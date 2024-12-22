@@ -1,0 +1,45 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Meminisse.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:Meminisse.Views"
+		xmlns:toolkit="clr-namespace:Avalonia.Toolkit;assembly=Avalonia"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Meminisse.Views.MainWindow"
+		x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Meminisse"
+		Background="#101011"
+		SizeChanged="Window_SizeChanged">
+	<Grid x:Name="MainGrid">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="200" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<!-- Sidebar / App Bar-->
+		<Border Grid.Column="0" x:Name="Sidebar"
+				BorderBrush="#333"
+				BorderThickness="2"
+                BoxShadow="0 4 10 2 #00000070">
+			<StackPanel>
+				<TextBlock Text="Meminisse" Foreground="White" FontSize="24" Margin="10" />
+				<Border Height="2"
+                        Background="#333"
+                        Margin="10" />
+			</StackPanel>
+		</Border>
+		<Border x:Name="Content"
+                Grid.Column="1"
+				BorderBrush="Red"
+                Margin="5"
+                BoxShadow="0 4 10 2 #00000070">
+			<TransitioningContentControl Margin="10" Content="{Binding CurrentView}" Grid.Column="1" />
+		</Border>
+	</Grid>
+</Window>

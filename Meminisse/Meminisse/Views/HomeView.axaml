@@ -1,0 +1,25 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:vm="clr-namespace:Meminisse.ViewModels"
+			 xmlns:views="clr-namespace:Meminisse.Views"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:components="clr-namespace:Meminisse.Views.Components;assembly=Meminisse"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Meminisse.Views.HomeView"
+			 x:DataType="vm:HomeViewModel">
+	<StackPanel>
+		<TextBlock Text="Welcome to Home!" />
+		<Button Content="Go to Main" Command="{Binding NavigateToMain}" />
+		<ItemsControl ItemsSource="{Binding Memories}">
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<components:MemoryView Memory="{Binding}" />
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
+
+		<Button Content="Add Memory" Command="{Binding CreateNewMemory}" />
+	</StackPanel>
+</UserControl>
+
