@@ -31,5 +31,7 @@ internal abstract class BaseRepositoryTest
     protected void Dispose()
     {
         Context.Database.EnsureDeleted();
+        Context.Dispose();
     }
+
 }

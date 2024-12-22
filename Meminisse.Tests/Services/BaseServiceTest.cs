@@ -36,6 +36,7 @@ internal class BaseServiceTest
     protected void Dispose()
     {
         Context.Database.EnsureDeleted();
+        Context.Dispose();
         Provider.Dispose();
     }
 }
