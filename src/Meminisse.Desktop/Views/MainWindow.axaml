@@ -34,16 +34,21 @@
                             HorizontalAlignment="Left" Margin="5" />
 
                     <!-- Sidebar content (e.g., navigation items) -->
-                    <TextBlock Text="Home" Margin="10" />
-                    <TextBlock Text="Albums" Margin="10" />
-                    <TextBlock Text="Settings" Margin="10" />
+                    <ItemsControl ItemsSource="{Binding NavigationItems}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Content="{Binding Name}"
+                                        Command="{Binding ((vm:MainWindowViewModel)DataContext).SelectViewModel, RelativeSource={RelativeSource AncestorType=Window}}"
+                                        CommandParameter="{Binding ViewModel}"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </StackPanel>
             </Border>
 
             <!-- Main content -->
             <Grid Grid.Column="1">
-                <TextBlock Text="Main Content Area" HorizontalAlignment="Center" VerticalAlignment="Center"
-                           FontSize="20" />
+                <TransitioningContentControl Content="{Binding SelectedViewModel}"/>
             </Grid>
         </Grid>
     </Border>
