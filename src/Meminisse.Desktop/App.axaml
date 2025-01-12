@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="Meminisse.Desktop.App"
              xmlns:local="using:Meminisse.Desktop"
+             xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia" 
              RequestedThemeVariant="Default">
     <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
@@ -12,6 +13,7 @@
     <Application.Styles>
         <FluentTheme />
         
+        <materialIcons:MaterialIconStyles />
         <Style Selector="Button.PrimaryAction">
             <!-- Normal Button Background -->
             <Setter Property="Background" Value="{DynamicResource primary-action}" />
@@ -24,6 +26,20 @@
         </Style>
         <Style Selector="Button.PrimaryAction:pointerover /template/ ContentPresenter">
             <Setter Property="Background" Value="{DynamicResource hover}" />
+        </Style>
+        
+        <Style Selector="Button.TransparentAction">
+            <!-- Normal Button Background -->
+            <Setter Property="Background" Value="Transparent" />
+            <!-- Normal Button Foreground (Text) -->
+            <Setter Property="Foreground" Value="{DynamicResource primary-50}" />
+            <!-- Border Radius (optional) -->
+            <Setter Property="CornerRadius" Value="4" />
+            <!-- Padding (optional) -->
+            <Setter Property="Padding" Value="10,5" />
+        </Style>
+        <Style Selector="Button.TransparentAction:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource surface-background}" />
         </Style>
     </Application.Styles>
 

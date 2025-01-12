@@ -3,6 +3,7 @@
         xmlns:vm="using:Meminisse.Desktop.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia" 
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Meminisse.Desktop.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -18,28 +19,48 @@
         <Grid>
             <!-- Define two columns: one for the sidebar and the other for the main content -->
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.2*" /> <!-- Sidebar -->
+                <ColumnDefinition Width="Auto" /> <!-- Sidebar -->
                 <ColumnDefinition Width="*" />   <!-- Main content -->
             </Grid.ColumnDefinitions>
 
             <!-- Sidebar -->
             <Border Grid.Column="0"
+                    Width="{Binding SidebarWidth}"
                     BorderBrush="{DynamicResource secondary-background}"
-                    BorderThickness="0, 0, 1, 0"
-                    MinWidth="50">
+                    BorderThickness="0, 0, 1, 0">
+                <Border.Styles>
+                    <!-- Sidebar width animation width DoubleTransition-->
+                    <Style Selector="Border">
+                        <Setter Property="Transitions">
+                            <Transitions>
+                                <DoubleTransition Property="Width" Duration="0:0:0.1"/>
+                            </Transitions>
+                        </Setter>
+                    </Style>
+                    
+                </Border.Styles>
                 <StackPanel>
                     <!-- Collapse/Expand button -->
-                    <Button Content="Meminisse"
-                            Classes="PrimaryAction"
-                            HorizontalAlignment="Left" Margin="5" />
+                    <Button Classes="TransparentAction"
+                            Command="{Binding ToggleSidebar}"
+                            HorizontalAlignment="Left" Margin="5" >
+                        <materialIcons:MaterialIcon Kind="{Binding SideBarIcon}"/>
+                    </Button>
 
                     <!-- Sidebar content (e.g., navigation items) -->
                     <ItemsControl ItemsSource="{Binding NavigationItems}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Button Content="{Binding Name}"
+                                <Button Classes="TransparentAction"
+                                        CornerRadius="0"
+                                        HorizontalAlignment="Stretch"
                                         Command="{Binding ((vm:MainWindowViewModel)DataContext).SelectViewModel, RelativeSource={RelativeSource AncestorType=Window}}"
-                                        CommandParameter="{Binding ViewModel}"/>
+                                        CommandParameter="{Binding ViewModel}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialIcons:MaterialIcon Margin="5 0 " Kind="{Binding Icon}"/>
+                                        <TextBlock IsVisible="{Binding ((vm:MainWindowViewModel)DataContext).SidebarCollapsed, RelativeSource={RelativeSource AncestorType=Window}}" Text="{Binding Name}" Margin="10 0"/>
+                                    </StackPanel>
+                                </Button>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
