@@ -3,13 +3,79 @@
              x:Class="Meminisse.Desktop.App"
              xmlns:local="using:Meminisse.Desktop"
              RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+    <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.DataTemplates>
-        <local:ViewLocator/>
+        <local:ViewLocator />
     </Application.DataTemplates>
-  
+
     <Application.Styles>
         <FluentTheme />
+        
+        <Style Selector="Button.PrimaryAction">
+            <!-- Normal Button Background -->
+            <Setter Property="Background" Value="{DynamicResource primary-action}" />
+            <!-- Normal Button Foreground (Text) -->
+            <Setter Property="Foreground" Value="{DynamicResource primary-50}" />
+            <!-- Border Radius (optional) -->
+            <Setter Property="CornerRadius" Value="4" />
+            <!-- Padding (optional) -->
+            <Setter Property="Padding" Value="10,5" />
+        </Style>
+        <Style Selector="Button.PrimaryAction:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource hover}" />
+        </Style>
     </Application.Styles>
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="primary-50">#f1f3fc</SolidColorBrush>
+                    <SolidColorBrush x:Key="primary-100">#e6e9f9</SolidColorBrush>
+                    <SolidColorBrush x:Key="primary-200">#d1d6f4</SolidColorBrush>
+                    <SolidColorBrush x:Key="primary-300">#b6bdeb</SolidColorBrush>
+                    <SolidColorBrush x:Key="primary-400">#989be1</SolidColorBrush>
+                    <SolidColorBrush x:Key="primary-500">#807ed6</SolidColorBrush>
+                    <SolidColorBrush x:Key="primary-600">#6f64c7</SolidColorBrush>
+                    <SolidColorBrush x:Key="primary-700">#5f54ae</SolidColorBrush>
+                    <SolidColorBrush x:Key="primary-800">#4d468d</SolidColorBrush>
+                    <SolidColorBrush x:Key="primary-900">#3f3b6c</SolidColorBrush>
+                    <SolidColorBrush x:Key="primary-950">#272442</SolidColorBrush>
+                    
+                    
+                    <SolidColorBrush x:Key="primary-background">#2d2a3b</SolidColorBrush>
+                    <SolidColorBrush x:Key="secondary-background">#3b3b4d</SolidColorBrush>
+                    <SolidColorBrush x:Key="surface-background">#474a63</SolidColorBrush>
+                    <LinearGradientBrush x:Key="gradient-background" StartPoint="25%, 0%" EndPoint="75%, 100%">
+                        <GradientStop Color="#2d2a3b"/>
+                        <GradientStop Color="#3b3b4d" Offset="1"/>
+                    </LinearGradientBrush>
+
+                    <SolidColorBrush x:Key="primary-text">#ffffff</SolidColorBrush>
+                    <SolidColorBrush x:Key="secondary-text">#d1d1d1</SolidColorBrush>
+                    <SolidColorBrush x:Key="disabled-text">#757575</SolidColorBrush>
+
+                    <SolidColorBrush x:Key="border">#4d4a63</SolidColorBrush>
+                    <SolidColorBrush x:Key="divider">#5f5c74</SolidColorBrush>
+
+                    <SolidColorBrush x:Key="primary-action">#807ed6</SolidColorBrush>
+                    <SolidColorBrush x:Key="secondary-action">#989be1</SolidColorBrush>
+                    <SolidColorBrush x:Key="hover">#6f64c7</SolidColorBrush>
+                    <SolidColorBrush x:Key="focus">#c0a0ff</SolidColorBrush>
+                    <SolidColorBrush x:Key="disabled">#6e6e6e</SolidColorBrush>
+
+                    <SolidColorBrush x:Key="success">#4CAF50</SolidColorBrush>
+                    <SolidColorBrush x:Key="warning">#FF9800</SolidColorBrush>
+                    <SolidColorBrush x:Key="error">#F44336</SolidColorBrush>
+                    <SolidColorBrush x:Key="info">#2196F3</SolidColorBrush>
+
+                    <SolidColorBrush x:Key="accent">#FFC107</SolidColorBrush>
+                    <SolidColorBrush x:Key="neutral">#9E9E9E</SolidColorBrush>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>

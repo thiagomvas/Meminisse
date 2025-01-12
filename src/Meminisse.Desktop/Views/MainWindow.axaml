@@ -7,14 +7,45 @@
         x:Class="Meminisse.Desktop.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Meminisse.Desktop">
+        Title="Meminisse.Desktop"
+        RequestedThemeVariant="Dark">
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
+        <vm:MainWindowViewModel />
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Border Background="{DynamicResource gradient-background}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid>
+            <!-- Define two columns: one for the sidebar and the other for the main content -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*" /> <!-- Sidebar -->
+                <ColumnDefinition Width="*" />   <!-- Main content -->
+            </Grid.ColumnDefinitions>
+
+            <!-- Sidebar -->
+            <Border Grid.Column="0"
+                    BorderBrush="{DynamicResource secondary-background}"
+                    BorderThickness="0, 0, 1, 0"
+                    MinWidth="50">
+                <StackPanel>
+                    <!-- Collapse/Expand button -->
+                    <Button Content="Meminisse"
+                            Classes="PrimaryAction"
+                            HorizontalAlignment="Left" Margin="5" />
+
+                    <!-- Sidebar content (e.g., navigation items) -->
+                    <TextBlock Text="Home" Margin="10" />
+                    <TextBlock Text="Albums" Margin="10" />
+                    <TextBlock Text="Settings" Margin="10" />
+                </StackPanel>
+            </Border>
+
+            <!-- Main content -->
+            <Grid Grid.Column="1">
+                <TextBlock Text="Main Content Area" HorizontalAlignment="Center" VerticalAlignment="Center"
+                           FontSize="20" />
+            </Grid>
+        </Grid>
+    </Border>
 
 </Window>

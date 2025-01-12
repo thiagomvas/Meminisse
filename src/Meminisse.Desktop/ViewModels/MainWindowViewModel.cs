@@ -1,6 +1,8 @@
-﻿namespace Meminisse.Desktop.ViewModels;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+
+namespace Meminisse.Desktop.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    public string Greeting { get; } = "Welcome to Avalonia!";
+    [ObservableProperty] private ViewModelBase? _selectedViewModel = new HomeViewModel();
 }
