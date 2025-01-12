@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meminisse.TestApp", "Memini
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meminisse.Tests", "Meminisse.Tests\Meminisse.Tests.csproj", "{22CDA52E-9721-4EB3-9235-8C0E26DE98DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meminisse.Desktop", "Meminisse.Desktop\Meminisse.Desktop.csproj", "{79A26A2D-F4DE-48A6-9D43-AC1584FBFE51}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{22CDA52E-9721-4EB3-9235-8C0E26DE98DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22CDA52E-9721-4EB3-9235-8C0E26DE98DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22CDA52E-9721-4EB3-9235-8C0E26DE98DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79A26A2D-F4DE-48A6-9D43-AC1584FBFE51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79A26A2D-F4DE-48A6-9D43-AC1584FBFE51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79A26A2D-F4DE-48A6-9D43-AC1584FBFE51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79A26A2D-F4DE-48A6-9D43-AC1584FBFE51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
