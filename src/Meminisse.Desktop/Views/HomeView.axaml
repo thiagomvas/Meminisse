@@ -2,7 +2,72 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:Meminisse.Desktop;assembly=Meminisse.Desktop"
+             xmlns:vm="using:Meminisse.Desktop.ViewModels"
+             xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Meminisse.Desktop.Views.HomeView">
-    Welcome to Home!
+             x:Class="Meminisse.Desktop.Views.HomeView"
+             x:DataType="vm:HomeViewModel">
+    <UserControl.Resources>
+        <local:MemoryTypeToVisibilityConverter x:Key="MemoryTypeToVisibilityConverter" />
+    </UserControl.Resources>
+    <ScrollViewer>
+        <StackPanel>
+            <ItemsControl ItemsSource="{Binding Memories}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="{DynamicResource secondary-background}"
+                                Margin="10"
+                                Padding="10"
+                                CornerRadius="10"
+                                Width="400">
+                            <StackPanel>
+                                <TextBlock Text="{Binding Title}"
+                                           TextWrapping="Wrap" />
+                                <TextBlock Text="{Binding Description}"
+                                           TextWrapping="Wrap" />
+                                <Panel>
+                                    <Border Background="{DynamicResource surface-background}"
+                                            Margin="40 10"
+                                            CornerRadius="10"
+                                            Padding="10">
+                                        <Carousel x:Name="MemoryItemCarousel" ItemsSource="{Binding MemoryItems}">
+                                            <Carousel.PageTransition>
+                                                <CompositePageTransition>
+                                                    <PageSlide Duration="0:00:00.500" Orientation="Horizontal" />
+                                                </CompositePageTransition>
+                                            </Carousel.PageTransition>
+                                            <Carousel.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Content}"
+                                                               TextWrapping="Wrap" />
+                                                    <!-- IsVisible="{Binding Type, Converter={StaticResource MemoryTypeToVisibilityConverter}, ConverterParameter=text}" -->
+                                                </DataTemplate>
+                                            </Carousel.ItemTemplate>
+                                        </Carousel>
+                                    </Border>
+                                </Panel>
+                                <Panel Margin="5">
+
+                                    <Button Classes="TransparentAction"
+                                            Command="{Binding ((vm:HomeViewModel)DataContext).SlidePreviousCarousel, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding ElementName=MemoryItemCarousel}">
+                                        <materialIcons:MaterialIcon Kind="MenuLeft" />
+                                    </Button>
+                                    <Button Classes="TransparentAction"
+                                            Command="{Binding ((vm:HomeViewModel)DataContext).SlideNextCarousel, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            HorizontalAlignment="Right"
+                                            CommandParameter="{Binding ElementName=MemoryItemCarousel}">
+                                        <materialIcons:MaterialIcon Kind="MenuRight" />
+                                    </Button>
+                                </Panel>
+
+                            </StackPanel>
+
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

@@ -1,29 +1,36 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using Avalonia;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Material.Icons;
 using Material.Icons.Avalonia;
+using Meminisse.Application;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Meminisse.Desktop.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    [ObservableProperty] private ViewModelBase? _selectedViewModel = new HomeViewModel();
+    [ObservableProperty] private ViewModelBase? _selectedViewModel;
     [ObservableProperty] private MaterialIconKind _sideBarIcon = MaterialIconKind.Menu;
     [ObservableProperty] private bool _sidebarCollapsed = false;
     [ObservableProperty] private double _sidebarWidth = 250;
-    
-    public ObservableCollection<NavigationItem> NavigationItems { get; } = new ObservableCollection<NavigationItem>
-    {
-        new NavigationItem("Home", new HomeViewModel(), MaterialIconKind.Home),
-        new NavigationItem("Settings", new SettingsViewModel(), MaterialIconKind.Settings)
-    };
 
-    public MainWindowViewModel()
+    private readonly IServiceProvider _provider;
+    public ObservableCollection<NavigationItem> NavigationItems { get; } 
+
+    public MainWindowViewModel(IServiceProvider provider)
     {
+        _provider = provider;
+        NavigationItems = new ObservableCollection<NavigationItem>
+        {
+            new NavigationItem("Home", _provider.GetRequiredService<HomeViewModel>(), MaterialIconKind.Home),
+            new NavigationItem("Settings", _provider.GetRequiredService<HomeViewModel>(), MaterialIconKind.Settings)
+        };
+        SelectedViewModel = NavigationItems.FirstOrDefault()!.ViewModel;
         ToggleSidebar();
-        
     }
     [RelayCommand]
     public void ToggleSidebar()
@@ -36,7 +43,10 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     public void SelectViewModel(ViewModelBase viewModel)
     {
-        SelectedViewModel = viewModel;
+        using (var scope = _provider.CreateScope())
+        {
+            SelectedViewModel = scope.ServiceProvider.GetRequiredService(viewModel.GetType()) as ViewModelBase;
+        }
     }
 }
 
